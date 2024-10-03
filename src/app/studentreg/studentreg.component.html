@@ -1,0 +1,66 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <h3 class="text-center">Student Registration</h3>
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter your name">
+          <div *ngIf="registrationForm.get('name')?.invalid && registrationForm.get('name')?.touched"
+            class="text-danger">
+            Name is required
+          </div>
+        </div><br>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email">
+          <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
+            class="text-danger">
+            Enter a valid email
+          </div>
+        </div><br>
+
+
+        <div class="form-group">
+          <label for="courseSelect">Select Course</label>
+          <select class="form-control" id="courseSelect" formControlName="registration_number">
+            <option *ngFor="let course of courses" [value]="course.code">
+              {{ course.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mt-3">
+          <button class="btn btn-primary btn-block" type="submit">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<h4>Students</h4>
+
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped text-center mx-auto" style="width: 60%;">
+      <thead class="thead-light">
+        <tr>
+          <th>id</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Registration Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.id }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.registration_number }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
